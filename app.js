@@ -10,9 +10,9 @@ const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerDefinition = require('./swaggerDefs');
 
 const options = {
-	  swaggerDefinition,
-	  apis: swaggerDefinition.apis, // from the exported definition file
-	 };
+  swaggerDefinition,
+  apis: swaggerDefinition.apis, // from the exported definition file
+};
 
 // Generate Swagger specification from the JSDoc comments
 const swaggerSpec = swaggerJSDoc(options);
@@ -31,10 +31,10 @@ app.use(express.json())
 var db = require('./db.js');
 
 try {
-	  db.sequelize.authenticate();
-	  console.log('Connection has been established successfully.');
+  db.sequelize.authenticate();
+  console.log('Connection has been established successfully.');
 } catch (error) {
-	  console.error('Unable to connect to the database:', error);
+  console.error('Unable to connect to the database:', error);
 }
 
 // view engine setup
@@ -56,12 +56,12 @@ app.use('/update', updateRouter);
 app.use('/delete', deleteRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
