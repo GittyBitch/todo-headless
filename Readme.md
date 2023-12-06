@@ -1,17 +1,13 @@
+## What
+- express
+- sequelize https://github.com/sequelize/sequelize
+- swagger https://dev.to/kabartolo/how-to-document-an-express-api-with-swagger-ui-and-jsdoc-50do
+
 ## Run (bash)
 
     $ npm install
     $ DEBUG=todojs:* npm start
     $ bash ./test.sh
-
-
-express
-
-sqlite3
-
-https://github.com/sequelize/sequelize
-
-https://dev.to/kabartolo/how-to-document-an-express-api-with-swagger-ui-and-jsdoc-50do
 
 ## DB Config
 
@@ -19,3 +15,4 @@ https://dev.to/kabartolo/how-to-document-an-express-api-with-swagger-ui-and-jsdo
 
 ## Swagger
 
+    swagger-jsdoc  -d swaggerDefs.js app.js routes/*.js
