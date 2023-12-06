@@ -1,33 +1,13 @@
-// Function to add a new item to the table
-function addItemToTable(title, description, status, creation) {
-    // Get the table body
-    const tableBody = document.getElementById('items').getElementsByTagName('tbody')[0];
+//alert("loaded");
 
-    // Create a new row and cells
-    const newRow = document.createElement('tr');
-    const titleCell = document.createElement('td');
-    const descriptionCell = document.createElement('td');
-    const statusCell = document.createElement('td');
-    const creationCell = document.createElement('td');
+var allData = null; // HACK
 
-    // Set the text for each cell
-    titleCell.textContent = title;
-    descriptionCell.textContent = description;
-    statusCell.textContent = status;
-    creationCell.textContent = creation;
-
-    // Append cells to the row
-    newRow.appendChild(titleCell);
-    newRow.appendChild(descriptionCell);
-    newRow.appendChild(statusCell);
-    newRow.appendChild(creationCell);
-
-    // Append the row to the table body
-    tableBody.appendChild(newRow);
-}
-
-
-// JavaScript to fetch data from an API endpoint
+Handlebars.registerHelper('eq', function(arg1, arg2) {
+    return arg1 == arg2;
+  });
+  
+  document.addEventListener('DOMContentLoaded', (event) => {
+  
 fetch('/list', {method: 'POST'})
   .then(response => {
     if (!response.ok) {
@@ -37,12 +17,22 @@ fetch('/list', {method: 'POST'})
   })
   .then(data => {
     console.log(data); // Process our data here
-    // dynamically insert data into the DOM
-    data.forEach(element => {
-        addItemToTable(element.title, element.description, element.status, element.createdAt);    
-    });
+    // Get the template from the <script> tag
+    var source   = document.getElementById("template").innerHTML;
+    //console.log("template is:", source);
+
+    // Use Handlebars to compile the template
+    var template = Handlebars.compile(source);
+
+    // Generate the HTML and insert it into the DOM
+    var html    = template({items:data});
+    console.log( "result", html);
+    document.getElementById('content').innerHTML = html;
+    //alert("done");
     
   })
   .catch(error => {
     console.error('There has been a problem with the fetch operation:', error);
   });
+
+});

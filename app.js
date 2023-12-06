@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -8,6 +9,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerDefinition = require('./swaggerDefs');
+const { engine } = require('express-handlebars');
 
 const options = {
   swaggerDefinition,
@@ -18,7 +20,6 @@ const options = {
 const swaggerSpec = swaggerJSDoc(options);
 
 var indexRouter = require('./routes/index');
-
 var saveRouter = require('./routes/save');
 var listRouter = require('./routes/list');
 var updateRouter = require('./routes/update');
@@ -26,6 +27,11 @@ var deleteRouter = require('./routes/delete');
 
 var app = express();
 app.use(express.json())
+
+// view engine setup
+app.engine('handlebars', engine());
+app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'views'));
 
 var db = require('./db.js');
 
@@ -37,15 +43,18 @@ try {
   console.error('Unable to connect to the database:', error);
 }
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Serve Bootstrap CSS and JS from node_modules
+app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
+app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
+
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/', indexRouter);
@@ -56,7 +65,7 @@ app.use('/delete', deleteRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(404));
+  //next(createError(404));
 });
 
 // error handler

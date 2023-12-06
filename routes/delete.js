@@ -4,7 +4,7 @@ var router = express.Router();
 var db = require('../db');
 var status = require('./common');
 
-router.post('/', async function (req, res, next) {
+router.delete('/', async function (req, res, next) {
 	await db.TodoItem.destroy({
 		where: {
 			id: req.body.id

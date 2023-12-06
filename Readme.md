@@ -1,3 +1,5 @@
+https://sequelize.org/
+
 ## What
 - express
 - sequelize https://github.com/sequelize/sequelize

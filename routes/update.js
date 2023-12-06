@@ -5,7 +5,7 @@ var db = require('../db');
 var status = require('./common');
 
 
-router.post('/', async function (req, res, next) {
+router.put('/', async function (req, res, next) {
 	await db.TodoItem.update(
 		req.body,
 		{
