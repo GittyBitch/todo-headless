@@ -13,8 +13,8 @@ router.put('/', async function (req, res) {
 		status: req.body.status
 	});
 	
-	// FIXME: Error handling and return id of new item
-	status.successResponse({status:"success"}, res);
+	// Error handling and return id of new item
+	status.successResponse({status:"success", id:item.id}, res);
 });
 
 module.exports = router;
