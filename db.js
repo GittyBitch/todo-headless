@@ -24,12 +24,6 @@ async function syncDatabase() {
 	}
 }
 
-sequelize.sync({ force: true }) // Forces table creation, drops it first if it already exists
-	.then(() => {
-		console.log('Tables have been created');
-	}).catch(err => console.error('Error creating tables:', err));
-
-
 module.exports = {
 	sequelize: sequelize,
 	TodoItem: TodoItem,

@@ -18,7 +18,6 @@ const options = {
 const swaggerSpec = swaggerJSDoc(options);
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
 var saveRouter = require('./routes/save');
 var listRouter = require('./routes/list');
@@ -32,6 +31,7 @@ var db = require('./db.js');
 
 try {
   db.sequelize.authenticate();
+  db.syncDatabase();
   console.log('Connection has been established successfully.');
 } catch (error) {
   console.error('Unable to connect to the database:', error);
@@ -49,7 +49,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/save', saveRouter);
 app.use('/list', listRouter);
 app.use('/update', updateRouter);
