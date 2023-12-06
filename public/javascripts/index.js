@@ -2,12 +2,17 @@
 
 Handlebars.registerHelper('eq', function(arg1, arg2) {
     return arg1 == arg2;
-  });
+});
+
+
+Handlebars.registerHelper('idx1', function(arg1) {
+    return arg1 +1;
+});
 
 function processEvent(event, payload) {
-  var actions = {   'save':     { route:'save', method:'post' }, //TODO: add hidden status
-                    'update':   { route:'update', method:'post'}, // TODO: description and status
-                    'delete':   { route:'delete', method:'post' }
+  var actions = {   'save':     { route:'save', method:'put' }, //TODO: add hidden status
+                    'update':   { route:'update', method:'put'}, // TODO: description and status
+                    'delete':   { route:'delete', method:'delete' }
 };       
   var context = actions[event];
        fetch(context.route, {
@@ -37,7 +42,6 @@ function saveItem () {
     processEvent('save',{title:document.getElementById('title').value, status:'open' });
 }
 
-
 function updateItem (id, newState) {
     console.log("Updating item", id);
     // open, in progress, finished
@@ -51,7 +55,7 @@ function deleteItem (id) {
 
 
 function updateList() {
-  fetch('/list', {method: 'POST'})
+  fetch('/list', {method: 'GET'})
   .then(response => {
     if (!response.ok) {
       throw new Error('Network response was not ok ' + response.statusText);

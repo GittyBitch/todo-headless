@@ -10,7 +10,7 @@ function respond(status, msg, res, error) {
 }
 
 function errorResponse(msg, res, error) {
-    respond(404, "An error occurred:" + msg, res, error);
+    respond(500, "An error occurred:" + msg, res, error);
 }
 
 function successResponse(msg, res) {

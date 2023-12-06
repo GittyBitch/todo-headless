@@ -4,10 +4,10 @@ var router = express.Router();
 var db = require('../db');
 var status = require('./common');
 
-router.post('/', async function (req, res, next) {
+router.get('/', async function (req, res, next) {
     //FIXME: error handling
     result = await db.TodoItem.findAll();
-    status.successResponse(JSON.stringify(result), res); // result versus status
+    status.successResponse(JSON.stringify(result), res); // TODO: result versus status
 });
 
 module.exports = router;

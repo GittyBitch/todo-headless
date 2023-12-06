@@ -5,7 +5,7 @@ var db = require('../db');
 var status = require('./common');
 
 
-router.post('/', async function (req, res) {
+router.put('/', async function (req, res) {
 	const item = await db.TodoItem.create({
 		title: req.body.title,
 		description: req.body.description,

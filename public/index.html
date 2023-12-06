@@ -17,7 +17,7 @@
     <script id="template" type="text/x-handlebars-template">
         {{#each items as |item|}}
         <tr>
-            <th scope="row">{{@index}}</th>
+            <th scope="row">{{idx1 @index}}</th>
             {{#if (eq item.status "finished")}}
                 <td><s>{{item.title}}</s></td>
             {{else}}
