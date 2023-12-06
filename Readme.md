@@ -1,4 +1,5 @@
 https://sequelize.org/
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
 
 ## What
 - express

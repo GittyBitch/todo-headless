@@ -5,7 +5,7 @@ var db = require('../db');
 var status = require('./common');
 
 
-router.put('/', async function (req, res, next) {
+router.post('/', async function (req, res, next) {
 	await db.TodoItem.update(
 		req.body,
 		{
@@ -13,10 +13,10 @@ router.put('/', async function (req, res, next) {
 				id: req.body.id
 			}
 		}).then(() => {
-			status.successResponse('Record updated successfully', res);
+			status.successResponse({status:'Record updated successfully'}, res);
 		}).catch((error) => 
 		{
-			status.errorResponse('Record NOT updated successfully', res, error);	
+			status.errorResponse({status:'Record NOT updated successfully'}, res, error);	
 		});
 });
 

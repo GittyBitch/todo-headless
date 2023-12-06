@@ -3,10 +3,10 @@ function respond(status, msg, res, error) {
     if(error)
         console.error(msg, error);
     else
-        console.log(msg);
+        console.log(/*msg*/); // silent
 
     //FIXME: JSON + error
-    res.status(status).send( msg );
+    res.status(status).send( msg ); // result jq
 }
 
 function errorResponse(msg, res, error) {

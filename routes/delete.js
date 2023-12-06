@@ -4,15 +4,15 @@ var router = express.Router();
 var db = require('../db');
 var status = require('./common');
 
-router.delete('/', async function (req, res, next) {
+router.post('/', async function (req, res, next) {
 	await db.TodoItem.destroy({
 		where: {
 			id: req.body.id
 		}
 	}).then(() => {
-		status.successResponse('Record deleted successfully', res);
+		status.successResponse({status:'Record deleted successfully'}, res);
 	}).catch((error) => {
-		status.errorResponse('Problem deleting entry', res, error)
+		status.errorResponse({status:'Problem deleting entry'}, res, error)
 	});
 
 });

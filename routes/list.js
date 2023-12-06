@@ -7,7 +7,7 @@ var status = require('./common');
 router.post('/', async function (req, res, next) {
     //FIXME: error handling
     result = await db.TodoItem.findAll();
-    status.successResponse(JSON.stringify(result), res);
+    status.successResponse(JSON.stringify(result), res); // result versus status
 });
 
 module.exports = router;
